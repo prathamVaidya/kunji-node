@@ -1,4 +1,8 @@
-# kunji-node
+# Kunji NodeJS Library
+
+Setup Authentication and Authorization in your React application in seconds without any verification! Suitable for MVP, side projects or hackathon apps.
+
+## Introduction
 
 `kunji-node` is a Node.js library designed to verify tokens issued by the Kunji authorization server. It comes with an `AuthMiddleware` that can be easily integrated into your Node.js applications to secure routes and endpoints.
 
@@ -8,7 +12,7 @@ You can use the kunji service to integrate login within minutes.
 
 ## Installation
 
-To install kunji-node, use npm:
+To install `kunji-node`, use npm:
 
 ```bash
 npm install kunji-node
@@ -87,9 +91,10 @@ When using typescript, use the `AuthRequest` type from the package to be able to
 
 Example:
 
-```
+```typescript
 import { Response, NextFunction, RequestHandler } from 'express';
-import { AuthRequest } from "kunji-node"; // Important: require Kunji env vars to be loaded else will throw error 500 when request will be made
+import { AuthRequest } from "kunji-node"; 
+// Important: when importing middleware directly, Kunji env vars should be configured else it will throw error 500 for every authenticated request
 
 const middleware : RequestHandler = (req: AuthRequest, response: Response, nextFunction : NextFunction) => {
     console.log(req.user.uid)
