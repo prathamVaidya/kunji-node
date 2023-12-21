@@ -27,10 +27,10 @@ This section will be updated after official production release.
 
 There are two ways to use the authentication middleware in your application:
 
-1. Using the default export:
+1. Using the `Kunji` export to initialize:
 
 ```javascript
-import Kunji from 'kunji-node';
+import { Kunji } from 'kunji-node';
 
 const { AuthMiddleware } = Kunji(appId, publicKey);
 
@@ -53,9 +53,11 @@ app.use(AuthMiddleware); // Use the authentication middleware for all routes
 // Rest of the code
 ```
 
-**Note**: The second method requires the environment variables `KUNJI_APP_ID` and `KUNJI_PUBLIC_KEY` to be properly configured.
+**Note**: The second method requires the environment variables `KUNJI_APP_ID` and `KUNJI_PUBLIC_KEY` to be properly configured. If not configured 500 Response will be given whenever the middleware will be used.
 
 Integrate this middleware into Express before routes requiring authentication. Afterward, you can access the user object using `req.user` in your controller, with the user's unique ID defined as `req.user.uid`.
+
+[![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?style=flat-square&logo=codesandbox)](https://codesandbox.io/p/devbox/xjpn87?embed=1)
 
 
 ## Configuration
@@ -87,7 +89,7 @@ Example:
 
 ```
 import { Response, NextFunction, RequestHandler } from 'express';
-import {AuthRequest} from "kunji-node";
+import { AuthRequest } from "kunji-node"; // Important: require Kunji env vars to be loaded else will throw error 500 when request will be made
 
 const middleware : RequestHandler = (req: AuthRequest, response: Response, nextFunction : NextFunction) => {
     console.log(req.user.uid)
