@@ -1,4 +1,3 @@
 # 1.0.0 (2023-12-20)
-
-
+    - `AuthMiddleware` for using with express to verify tokens
 
