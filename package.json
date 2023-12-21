@@ -37,6 +37,7 @@
     "serve": "nodemon ./src/index.ts",
     "test": "NODE_ENV=test mocha",
     "upgrade": "npx npm-check -u",
+    "publish": "npm run build && npm publish --access public",
     "version": "npm run build && npm run changelog:update"
   },
   "devDependencies": {
