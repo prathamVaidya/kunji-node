@@ -1,6 +1,6 @@
 {
   "name": "kunji-node",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Kunji NodeJS package to verify kunji tokens",
   "keywords": [
     "typescript",
@@ -37,7 +37,7 @@
     "serve": "nodemon ./src/index.ts",
     "test": "NODE_ENV=test mocha",
     "upgrade": "npx npm-check -u",
-    "publish": "npm run build && npm publish --access public",
+    "publish": "npm run test && npm run build && npm publish --access public",
     "version": "npm run build && npm run changelog:update"
   },
   "devDependencies": {
