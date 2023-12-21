@@ -8,7 +8,6 @@
 		"plugin:@typescript-eslint/recommended"
 	],
 	"rules": {
-		"indent": ["error", "tab"],
 		"quotes": ["error", "single"]
 	}
 }

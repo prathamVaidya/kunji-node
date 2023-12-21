@@ -1,5 +1,8 @@
 'use strict';
 
-export const abc = () => {
-	return 'hello'
+import MiddlewareFactory, {AuthMiddleware} from './middlewares/MiddlewareFactory';
+
+export default MiddlewareFactory
+export {
+	AuthMiddleware
 }
