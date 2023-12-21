@@ -28,7 +28,7 @@ const MiddlewareFactory = (appId: string, publicKey: string) : KunjiMiddlewares 
                 const decodedValue = verifyAccessToken(token, appId, publicKey);
         
                 if (decodedValue) {
-                    req.user = decodedValue;
+                    // req.user = decodedValue;
                     console.log(req.user);
                     return next();
                 }

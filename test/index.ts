@@ -1,7 +1,7 @@
 'use strict';
 import express, { Express, Request, Response } from 'express';
 import supertest from 'supertest';
-import Kunji from '../src/index';
+import { Kunji } from '../src/index';
 
 // test application configuration
 const appId = 'test';
