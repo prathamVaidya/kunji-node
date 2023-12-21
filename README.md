@@ -1,1 +1,104 @@
-# Kunji Node.js Library
+# kunji-node
+
+`kunji-node` is a Node.js library designed to verify tokens issued by the Kunji authorization server. It comes with an `AuthMiddleware` that can be easily integrated into your Node.js applications to secure routes and endpoints.
+
+You can use the kunji service to integrate login within minutes.
+
+> Also check the frontend react library for client: [kunji-react](https://www.npmjs.com/package/kunji-react)
+
+## Installation
+
+To install kunji-node, use npm:
+
+```bash
+npm install kunji-node
+```
+or use yarn:
+
+```bash
+yarn add kunji-node
+```
+
+## How to register App
+
+This section will be updated after official production release.
+
+## Usage
+
+There are two ways to use the authentication middleware in your application:
+
+1. Using the default export:
+
+```javascript
+import Kunji from 'kunji-node';
+
+const { AuthMiddleware } = Kunji(appId, publicKey);
+
+// Your express other routes
+
+app.use(AuthMiddleware); // Use the authentication middleware for all routes
+
+// Rest of the code
+```
+
+2. Directly importing `AuthMiddleware` with environment variables:
+
+```javascript
+import { AuthMiddleware } from 'kunji-node';
+
+// Your express other routes
+
+app.use(AuthMiddleware); // Use the authentication middleware for all routes
+
+// Rest of the code
+```
+
+**Note**: The second method requires the environment variables `KUNJI_APP_ID` and `KUNJI_PUBLIC_KEY` to be properly configured.
+
+Integrate this middleware into Express before routes requiring authentication. Afterward, you can access the user object using `req.user` in your controller, with the user's unique ID defined as `req.user.uid`.
+
+
+## Configuration
+
+Make sure to set the following environment variables for configuration:
+
+- `KUNJI_APP_ID`: Your Kunji application ID
+- `KUNJI_PUBLIC_KEY`: Your Kunji public key
+
+## Access Token Result (`req.user`)
+
+After the middleware verifies the request, you can access the token result using `req.user`. The interface for the access token result is as follows:
+
+| Field       | Type    | Description                                          |
+|-------------|---------|------------------------------------------------------|
+| `uid`       | string  | User ID associated with the access token             |
+| `role`      | string  | Role assigned to the user                            |
+| `iss`       | string  | Issuer of the access token (e.g., Kunji)             |
+| `aud`       | string  | Audience for which the access token is intended      |
+| `iat`       | number  | Issued at timestamp (UNIX timestamp in seconds)     |
+| `exp`       | number  | Expiration timestamp (UNIX timestamp in seconds)    |
+
+
+## Typescript
+
+When using typescript, use the `AuthRequest` type from the package to be able to access `req.user`. 
+
+Example:
+
+```
+import { Response, NextFunction, RequestHandler } from 'express';
+import {AuthRequest} from "kunji-node";
+
+const middleware : RequestHandler = (req: AuthRequest, response: Response, nextFunction : NextFunction) => {
+    console.log(req.user.uid)
+    // your middleware logic
+}
+```
+
+## Contributions
+
+Contributions are welcome! If you find any issues or have suggestions for improvements, feel free to create an issue or submit a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
