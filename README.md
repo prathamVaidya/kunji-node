@@ -71,6 +71,21 @@ Make sure to set the following environment variables for configuration:
 - `KUNJI_APP_ID`: Your Kunji application ID
 - `KUNJI_PUBLIC_KEY`: Your Kunji public key
 
+Example .env (Important: Use double inverted commas for public key when setting in .env):
+
+```
+KUNJI_APP_ID=test
+KUNJI_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0QH5YHC2ZmW1w5JYuWeE
+YGFU4iXjbDP3HHKO9EiRjWQMiMErHALaHV9WKkgimEMdDmIfPNc6kVgTYTuTTgAa
+PL9cdNjJ3qQuPFSR6fx3DL5GUBee99fMQJE0jYhkwO5eyquUMGd1ACss/5bWD1g8
+P/saM+Y3BQp2lXse/Z2rsYrgVO1r52iYrqNfkzInj3iS1VrRbIBBnpncSWJPwWap
+RdrgZhkitpFOc/jc+wsBZuMKPab7f9o4S8BOJVmO7pG+qY8Bk1kC4OiYyADpErLs
+3kOAZZo9IllQJMFZ3C4w7aeTmlZZRchgFhbulHewz7cmN6MtNG6FRE58n9KDFdhY
+yQIDAQAB
+-----END PUBLIC KEY-----"
+```
+
 ## Access Token Result (`req.user`)
 
 After the middleware verifies the request, you can access the token result using `req.user`. The interface for the access token result is as follows:

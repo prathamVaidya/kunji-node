@@ -6,7 +6,7 @@ import { verifyAccessToken } from '../helpers/TokenHelper';
 const MiddlewareFactory = (appId: string, publicKey: string, config: { debug?: boolean } = { }) : KunjiMiddlewares => {
     // Priority to Config object -> env KUNJI_ENABLE_DEBUG -> default false
     const debug = (log: unknown, isError: boolean = false) => {
-        if((config.debug == undefined ? (process.env.KUNJI_ENABLE_DEBUG ?? false) : config.debug)){
+        if((config.debug == undefined ? (process.env.KUNJI_ENABLE_DEBUG == 'true' ?? false) : config.debug)){
             // if true
             console.debug(`KUNJI-${(isError ? 'ERROR' : 'LOG')} :`, log)
         }
