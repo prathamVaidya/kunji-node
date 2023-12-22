@@ -102,6 +102,18 @@ const middleware : RequestHandler = (req: AuthRequest, response: Response, nextF
 }
 ```
 
+## Debugging
+
+1. Pass `debug:true` in `config` object while initialization. 
+Example : 
+```
+const { AuthMiddleware } = Kunji(appId, publicKey, {debug: true});
+```
+
+OR
+
+2. Set `KUNJI_ENABLE_DEBUG=true` as an environment variable (.env)
+
 ## Contributions
 
 Contributions are welcome! If you find any issues or have suggestions for improvements, feel free to create an issue or submit a pull request.

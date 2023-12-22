@@ -10,7 +10,7 @@ const invalidToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NTdhZDk3N
 // This Token has no expiry set for testing purposes
 const validToken = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NTdhZDk3N2VkMGVlNjg0MDMzMWNhYjQiLCJyb2xlIjoiQURNSU4iLCJpc3MiOiJrdW5qaS10ZXN0LWlzc3VlciIsImF1ZCI6InRlc3QiLCJpYXQiOjE3MDMxNDQ0OTR9.nhZxvYVeLGpGqds_IYC-2NuCQpwEfITSHPPOqCBVQAS718QhDPNB5Ps4fXVNkol_2qU64IJdZnPJAYNWVVIz2preyu5TwrwiwJGWglcMGVF-VOC8hlTqbE8sbQd-AGTYV9aVCxZEV__4Ffhfkd74lqYHxH0HA_G6SgSkcnWKWijcptIt0zAc8nqntbfFpdEMR64tTBErVopWWq9xLlG4EB_1ZecIRJ0Sz0gEc4THeW0vR4NJUHR-dWCKE2mMbLLLk20kMMalcjCTd-GII34rLeW_5rkqu3XLvBSOdiK0J_cdkEWIrmTbCvozW8Y_KosjuiCIqZHH-CeJDEKV_H1rmg';
 
-const { AuthMiddleware: authMiddleware } = Kunji(appId, publicKey);
+const { AuthMiddleware: authMiddleware } = Kunji(appId, publicKey, {debug: true});
 
 describe('Express Authentication Middleware', () => {
   let app: Express;

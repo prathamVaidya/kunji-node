@@ -3,7 +3,15 @@ import { Response, NextFunction } from 'express';
 import { AuthRequest, KunjiMiddlewares } from '../types';
 import { verifyAccessToken } from '../helpers/TokenHelper';
 
-const MiddlewareFactory = (appId: string, publicKey: string) : KunjiMiddlewares => {
+const MiddlewareFactory = (appId: string, publicKey: string, config: { debug?: boolean } = { }) : KunjiMiddlewares => {
+    // Priority to Config object -> env KUNJI_ENABLE_DEBUG -> default false
+    const debug = (log: unknown, isError: boolean = false) => {
+        if((config.debug == undefined ? (process.env.KUNJI_ENABLE_DEBUG ?? false) : config.debug)){
+            // if true
+            console.debug(`KUNJI-${(isError ? 'ERROR' : 'LOG')} :`, log)
+        }
+    }
+
     return {
             AuthMiddleware : async (req: AuthRequest, res: Response, next: NextFunction) => {
 
@@ -28,14 +36,14 @@ const MiddlewareFactory = (appId: string, publicKey: string) : KunjiMiddlewares 
                 const decodedValue = verifyAccessToken(token, appId, publicKey);
         
                 if (decodedValue) {
-                    // req.user = decodedValue;
-                    console.log(req.user);
+                    req.user = decodedValue;
+                    debug(req.user);
                     return next();
                 }
         
                 return res.status(401).send(ErrorMessage.STATUS_401_INVALID_TOKEN);
             } catch (error) {
-                // console.log(error)
+                debug(error)
                 return res.status(401).send(ErrorMessage.STATUS_401_INVALID_TOKEN);
             }
         }
