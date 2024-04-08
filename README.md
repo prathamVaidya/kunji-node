@@ -2,6 +2,8 @@
 
 Setup Authentication and Authorization in your React application in seconds without any verification! Suitable for MVP, side projects or hackathon apps.
 
+[![kunji-node](https://nodei.co/npm/kunji-node.png?downloads=true)](https://www.npmjs.com/package/kunji-node)  
+
 ## Introduction
 
 `kunji-node` is a Node.js library designed to verify tokens issued by the Kunji authorization server. It comes with an `AuthMiddleware` that can be easily integrated into your Node.js applications to secure routes and endpoints.
