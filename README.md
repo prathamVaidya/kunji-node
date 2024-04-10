@@ -25,9 +25,15 @@ or use yarn:
 yarn add kunji-node
 ```
 
-## How to register App
 
-This section will be updated after official production release.
+## How to register App
+Checkout [Kunji Official Site](https://kunji.prathamvaidya.in) for more information.
+
+1. Login to [Kunji Dashboard](https://kunji.prathamvaidya.in/dashboard).
+2. Go to Developer Mode.
+3. Register your app by filling only 3 required fields.
+4. You will see your App ID and Public Key.
+
 
 ## Usage
 
