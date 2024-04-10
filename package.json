@@ -1,6 +1,6 @@
 {
   "name": "kunji-node",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Kunji NodeJS package to verify kunji tokens",
   "keywords": [
     "typescript",
