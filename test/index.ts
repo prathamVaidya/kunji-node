@@ -10,8 +10,13 @@ const publicKey = 'LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQklqQU5CZ2txaGtpRzl3M
 const invalidToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NTdhZDk3N2VkMGVlNjg0MDMzMWNhYjQiLCJyb2xlIjoiTk9STUFMIiwiaWF0IjoxNzAzMTM3NDA2LCJleHAiOjE3MDMxNDEwMDZ9.OCupyvYlAET6EdrviCOHivAZFJNEtdraBpCLu8QM74s';
 // This Token has no expiry set for testing purposes
 const validToken = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NTdhZDk3N2VkMGVlNjg0MDMzMWNhYjQiLCJyb2xlIjoiQURNSU4iLCJpc3MiOiJrdW5qaS10ZXN0LWlzc3VlciIsImF1ZCI6InRlc3QiLCJpYXQiOjE3MDMxNDQ0OTR9.nhZxvYVeLGpGqds_IYC-2NuCQpwEfITSHPPOqCBVQAS718QhDPNB5Ps4fXVNkol_2qU64IJdZnPJAYNWVVIz2preyu5TwrwiwJGWglcMGVF-VOC8hlTqbE8sbQd-AGTYV9aVCxZEV__4Ffhfkd74lqYHxH0HA_G6SgSkcnWKWijcptIt0zAc8nqntbfFpdEMR64tTBErVopWWq9xLlG4EB_1ZecIRJ0Sz0gEc4THeW0vR4NJUHR-dWCKE2mMbLLLk20kMMalcjCTd-GII34rLeW_5rkqu3XLvBSOdiK0J_cdkEWIrmTbCvozW8Y_KosjuiCIqZHH-CeJDEKV_H1rmg';
+const customErrorMessage = 'You look like a thief';
 
-const { AuthMiddleware: authMiddleware } = Kunji(appId, publicKey);
+const { AuthMiddleware: authMiddleware } = Kunji(appId, publicKey, {
+  unauthorizedResponse : () => {
+      return { statusCode: 401, body: { error: true, message: customErrorMessage } }
+  } 
+});
 
 describe('Express Authentication Middleware', () => {
   let app: Express;
@@ -72,5 +77,24 @@ describe('Express Authentication Middleware', () => {
       .get('/authenticated-route')
       .set('Authorization', `Bearer ${invalidToken}`)
       .expect(401, done);
+  });
+
+  it('should use custom 401 error message', (done) => {
+
+    // Set up a route that requires authentication
+    app.get('/authenticated-route', (req: Request, res: Response) => {
+      res.sendStatus(200);
+    });
+
+    supertest(app)
+      .get('/authenticated-route')
+      .set('Authorization', `Bearer ${invalidToken}`)
+      .expect(401)
+      .expect((res) => {
+        if(!res.text.includes(customErrorMessage)){
+          throw new Error('Response body does not contain custom error message');
+        }
+      })
+      .end(done);
   });
 });

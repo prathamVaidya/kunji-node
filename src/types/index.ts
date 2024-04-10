@@ -16,3 +16,7 @@ export interface KunjiMiddlewares {
     AuthMiddleware : RequestHandler
 }
 
+export type UnauthorizedErrorI = 'NO_TOKEN' | 'INVALID_TOKEN'
+
+export type UnauthorizedResponseI = { statusCode: number, body: object | string, xml?: boolean}
+
