@@ -137,6 +137,26 @@ OR
 
 2. Set `KUNJI_ENABLE_DEBUG=true` as an environment variable (.env)
 
+
+## Custom Error Messages
+
+`kunji-node` by default returns error messages in `JSON` format with an error message and http status code `401`. To use a custom error message you can pass a function to set error message and status code in `unauthorizedResponse` field in `config` while initialization.
+
+Example : 
+```typescript
+const { AuthMiddleware } = Kunji(appId, publicKey, {unauthorizedResponse: (type) => {
+    if(type === 'NO_TOKEN'){
+        return { statusCode : 400, body: { error: "My custom error message and code", xml: false }}; // set xml to true to set Content-Type to application/xml
+    }
+
+    if(type === 'INVALID_TOKEN'){
+        return { statusCode : 401, body: { error: "You are not allowed here", xml: false}};
+    }
+}});
+```
+
+You can also set `xml` as `true` to set `Content-Type: application/xml` for the response header.
+
 ## Contributions
 
 Contributions are welcome! If you find any issues or have suggestions for improvements, feel free to create an issue or submit a pull request.
